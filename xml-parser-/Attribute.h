@@ -1,21 +1,22 @@
 #pragma once
-#include "MyString.h"
+#include "String.h"
 
 class Attribute
 {
-	MyString name;
-	MyString value;
+public:
+	String name;
+	String value;
 	Attribute* next;
 public:
-	Attribute(const MyString& name, const MyString& value);
+	Attribute(const String& name, const String& value);
 	~Attribute();
-	MyString toString() const;
+	String toString() const;
 
-	void setName(const MyString& name);
-	void setValue(const MyString& value);
+	void setName(const String& name);
+	void setValue(const String& value);
 	void setNext(Attribute* next);
-	MyString getName() const;
-	MyString getValue() const;
+	String getName() const;
+	String getValue() const;
 	Attribute* getNext() const;
 };
 

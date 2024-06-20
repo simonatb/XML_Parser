@@ -1,6 +1,6 @@
 #include "Attribute.h"
 
-Attribute::Attribute(const MyString& name, const MyString& value) :name(name), value(value), next(nullptr) {}
+Attribute::Attribute(const String& name, const String& value) :name(name), value(value), next(nullptr) {}
 
 Attribute::~Attribute()
 {
@@ -8,18 +8,18 @@ Attribute::~Attribute()
     delete next;
 }
 
-MyString Attribute::toString() const
+String Attribute::toString() const
 {
-    MyString result;
+    String result;
     return ((((result += name) += "=\"") += value) += "\"");
 }
 
-void Attribute::setName(const MyString& name)
+void Attribute::setName(const String& name)
 {
     this->name = name;
 }
 
-void Attribute::setValue(const MyString& value)
+void Attribute::setValue(const String& value)
 {
     this->value = value;
 }
@@ -29,12 +29,12 @@ void Attribute::setNext(Attribute* next)
     this->next = next;
 }
 
-MyString Attribute::getName() const
+String Attribute::getName() const
 {
     return name;
 }
 
-MyString Attribute::getValue() const
+String Attribute::getValue() const
 {
     return value;
 }

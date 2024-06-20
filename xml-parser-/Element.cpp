@@ -1,6 +1,6 @@
 #include "Element.h"
 
-Element::Element(const MyString& name) : name(name), firstAttribute(nullptr), firstChild(nullptr)
+Element::Element(const String& name) : name(name), firstAttribute(nullptr), firstChild(nullptr)
 {
     setNextSibling(nullptr);
 }
@@ -11,7 +11,7 @@ Element::~Element()
     delete firstChild;
 }
 
-void Element::setName(const MyString& name)
+void Element::setName(const String& name)
 {
     this->name = name;
 }
@@ -26,7 +26,7 @@ void Element::setFirstChild(Node* firstChild)
     this->firstChild = firstChild;
 }
 
-MyString Element::getName() const
+String Element::getName() const
 {
     return name;
 }
@@ -69,9 +69,9 @@ void Element::addChild(Node* child)
     }
 }
 
-MyString Element::toString() const
+String Element::toString() const
 {
-    MyString result("<");
+    String result("<");
     result += name;
     Attribute* attr(firstAttribute);
     while (attr) {

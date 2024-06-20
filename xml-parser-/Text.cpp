@@ -1,21 +1,21 @@
 #include "Text.h"
 
-Text::Text(const MyString& text) :text(text)
+Text::Text(const String& text) :text(text)
 {
     setNextSibling(nullptr);
 }
 
-MyString Text::toString() const
+String Text::toString() const
 {
     return text;
 }
 
-void Text::setText(const MyString& text)
+void Text::setText(const String& text)
 {
     this->text = text;
 }
 
-MyString Text::getText() const
+String Text::getText() const
 {
     return text;
 }

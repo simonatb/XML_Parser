@@ -2,13 +2,14 @@
 #include "Node.h"
 class Text : public Node
 {
-	MyString text;
 public:
-	Text(const MyString& text);
-	MyString toString() const override;
+	String text;
+public:
+	Text(const String& text);
+	String toString() const override;
 
-	void setText(const MyString& text);
-	MyString getText() const;
+	void setText(const String& text);
+	String getText() const;
 };
 
 
