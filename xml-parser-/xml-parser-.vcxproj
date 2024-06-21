@@ -145,6 +145,7 @@
     <ClInclude Include="String.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="XMLParser.h" />
+    <ClInclude Include="XPath.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Attribute.cpp" />
@@ -154,9 +155,10 @@
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="XMLParser.cpp" />
+    <ClCompile Include="XPath.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="input1.xml" />
+    <Text Include="test2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

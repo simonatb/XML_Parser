@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <sstream>
+#include <fstream>
 
 class String
 {
@@ -12,11 +13,11 @@ class String
     void free();
     void resize();
 
-    explicit String(unsigned capacity);
-
 public:
+    int getFileSize(std::ifstream& ifs);
+    void readFile(const char* filename);
+    explicit String(unsigned capacity);
     String();
-    String(std::stringstream& ss);
     String(const char* str);
     String(const String& other);
     String& operator=(const String& other);
@@ -25,7 +26,7 @@ public:
     unsigned length() const;
     const char* c_str() const;
     String& concat(const String& other);
-
+    
     String& operator+=(const String& other);
     String& operator+=(char ch);
 

@@ -6,6 +6,13 @@
 #include "Attribute.h"
 #include "Element.h"
 #include "Text.h"
-int main() {
+#include "XMLParser.h"
 
+int main() {
+    XMLParser test("test2.txt");
+    Element* root = test.parseXML();
+    test.print(root);
+    
 }
+
+    

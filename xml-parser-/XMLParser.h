@@ -7,13 +7,19 @@
 #include "Text.h"
 
 namespace {
-	constexpr char fileName[] = "test.xml";
+	constexpr unsigned BUFFER_SIZE = 124;
 }
 class XMLParser {
-
+	String filename;
 public:
-	std::stringstream& saveFileToStream();
+	XMLParser(const String& filename);
 
+	Element* parseXML();
+	Element* parseElement(String& buffer, size_t& pos);
+	void parseAttributes(Element* element,String& buffer, size_t& pos);
+	Text* parseText(String& buffer, size_t& pos);
+	String parseName(String& buffer, size_t& pos);
+	void print(Element* element);
 };
 
 

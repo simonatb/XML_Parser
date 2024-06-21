@@ -4,8 +4,7 @@
 
 class Element : public Node
 {
-public:
-	String name;
+	String name=nullptr;
 	Attribute* firstAttribute;
 	Node* firstChild;
 public:
@@ -16,7 +15,7 @@ public:
 	void setFirstAttribute(Attribute* firstAttribute);
 	void setFirstChild(Node* firstChild);
 
-	String getName() const;
+	String getName()const;
 	Attribute* getFirstAttribute() const;
 	Node* getFirstChild() const;
 

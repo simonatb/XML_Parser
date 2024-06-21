@@ -1,16 +1,15 @@
 #pragma once
 #include "String.h"
-
-class Attribute
+#include "Node.h"
+class Attribute :public Node
 {
-public:
 	String name;
 	String value;
 	Attribute* next;
 public:
 	Attribute(const String& name, const String& value);
 	~Attribute();
-	String toString() const;
+	String toString() const override;
 
 	void setName(const String& name);
 	void setValue(const String& value);

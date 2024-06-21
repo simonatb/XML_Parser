@@ -2,6 +2,10 @@
 #include <cstring>
 #pragma warning(disable:4996)
 
+namespace {
+    constexpr unsigned BUFFER_SIZE = 124;
+}
+
 void String::copyFrom(const String& other)
 {
     len = other.len;
@@ -27,6 +31,35 @@ void String::resize()
     data = newData;
 }
 
+int String::getFileSize(std::ifstream& ifs)
+{
+    int size = 0;
+    ifs.seekg(0,std::ios::end);
+    size = ifs.tellg();
+    ifs.seekg(0,std::ios::beg);
+    return size;
+}
+
+void String::readFile(const char* filename)
+{
+    std::ifstream ifs(filename);
+    if (!ifs.is_open()) {
+        std::cerr << "Error opening file: " << filename << std::endl;
+        
+    }
+
+    int size = getFileSize(ifs);
+    delete[] data; // Free existing data
+    data = new char[size + 1];
+    ifs.read(data, size);
+    data[size] = '\0';
+
+    len = size;
+    capacity = getNextPowerOfTwo(len);
+    ifs.close();
+  
+}
+
 String::String(unsigned cap)
 {
     capacity = cap;
@@ -36,15 +69,6 @@ String::String(unsigned cap)
 
 String::String() : String("")
 {
-}
-
-String::String(std::stringstream& ss)
-{
-    std::string tmp = ss.str(); // Extract the content as a std::string
-    len = tmp.size();
-    capacity = std::max((int)getNextPowerOfTwo(len), 16) - 1;
-    data = new char[capacity + 1];
-    std::strcpy(data, tmp.c_str());
 }
 
 String::String(const char* str)
@@ -138,11 +162,11 @@ bool String::isSpace(size_t index) const
 
 String String::substr(size_t start, size_t length) {
     if (start >= len) {
-        return String(""); // Return an empty string if start is out of bounds
+        return String(""); 
     }
 
     if (start + length > len) {
-        length = len - start; // Adjust length if it exceeds the bounds of the string
+        length = len - start; 
     }
 
     char* substr = new char[length + 1];
@@ -234,3 +258,4 @@ bool operator!=(const String& lhs, const String& rhs)
 {
     return strcmp(lhs.c_str(), rhs.c_str()) != 0;
 }
+
