@@ -8,11 +8,10 @@
 #include "Text.h"
 #include "XMLParser.h"
 
+#include "XPath.h"
 int main() {
-    XMLParser test("test2.txt");
-    Element* root = test.parseXML();
-    test.print(root);
-    
+   
+ 
 }
 
     

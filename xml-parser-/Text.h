@@ -9,6 +9,10 @@ public:
     
 	void setText(const String& text);
 	String getText() const;
+	String getName()const {
+		String empty("");
+		return empty;
+	}
 };
 
 

@@ -17,6 +17,7 @@ public:
 	String getName() const;
 	String getValue() const;
 	Attribute* getNext() const;
+	
 };
 
 

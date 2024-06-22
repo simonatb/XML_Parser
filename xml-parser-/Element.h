@@ -4,7 +4,7 @@
 
 class Element : public Node
 {
-	String name=nullptr;
+	String name="";
 	Attribute* firstAttribute;
 	Node* firstChild;
 public:
@@ -22,6 +22,9 @@ public:
 	void addAttribute(Attribute* attribute);
 	void addChild(Node* child);
 	String toString()const override;
+   
+   
+   
 };
 
 

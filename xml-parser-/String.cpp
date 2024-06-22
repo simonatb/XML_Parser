@@ -49,7 +49,7 @@ void String::readFile(const char* filename)
     }
 
     int size = getFileSize(ifs);
-    delete[] data; // Free existing data
+    delete[] data; 
     data = new char[size + 1];
     ifs.read(data, size);
     data[size] = '\0';
