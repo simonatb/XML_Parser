@@ -51,22 +51,30 @@ void Element::addAttribute(Attribute* attribute)
         while (temp->getNext()) {
             temp = temp->getNext();
         }
+       
         temp->setNext(attribute);
     }
 }
 
 void Element::addChild(Node* child)
 {
+    //std::cout << "in add child "<<firstChild << std::endl;
     if (!firstChild) {
         firstChild = child;
+        //std::cout << "first child " << firstChild << std::endl;
     }
     else {
         Node* temp = firstChild;
+        //std::cout << "vliza v while " << std::endl;
         while (temp->getNextSibling()) {
             temp = temp->getNextSibling();
+            //std::cout << temp << std::endl;
         }
+        //std::cout << "setva nextsibl" << std::endl;
         temp->setNextSibling(child);
+        //std::cout << "nextsibl "<<temp->getNextSibling() << std::endl;
     }
+    //std::cout << std::endl;
 }
 
 String Element::toString() const

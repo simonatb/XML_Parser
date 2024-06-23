@@ -60,6 +60,7 @@ Element* XMLParser::parseXML() {
     buffer.readFile(filename.c_str());
 
     Element* root = nullptr;
+    
     size_t pos = 0;
     while (pos < buffer.length()) {
         skipWhitespace(buffer, pos);
@@ -68,10 +69,11 @@ Element* XMLParser::parseXML() {
             Element* element = parseElement(buffer, pos);
             if (element) {
                 if (!root) {
-                    root = element;
+                    root = element;                   
                 }
                 else {
-                    root->addChild(element); 
+                    root->setNextSibling(element); 
+                    
                 }
             }
         }
@@ -84,7 +86,7 @@ Element* XMLParser::parseXML() {
 
 Element* XMLParser::parseElement(String& buffer, size_t& pos) {
     skipWhitespace(buffer, pos);
-    ++pos; 
+    ++pos;
 
     String name = parseName(buffer, pos);
     Element* element = new Element(name);
@@ -143,10 +145,17 @@ void XMLParser::parseAttributes(Element* element, String& buffer, size_t& pos) {
 Text* XMLParser::parseText(String& buffer, size_t& pos) {
     size_t start = pos;
     while (pos < buffer.length() && buffer[pos] != '<') {
+        if (buffer[pos] == '\n') {
+            return nullptr;
+        }
         ++pos;
     }
     String text = buffer.substr(start, pos - start);
-    return new Text(text);
+    
+    if (text != "\n") {
+        return new Text(text);
+    }
+    
 }
 
 String XMLParser::parseName(String& buffer, size_t& pos) {
@@ -158,28 +167,44 @@ String XMLParser::parseName(String& buffer, size_t& pos) {
 }
 
 void XMLParser::print(Element* element) {
-    if (!element) return;
+    
+    while (element) {
+        std::cout << "Element: " << element->getName() << std::endl;
 
-    std::cout << "Element: " << element->getName() << std::endl;
-
-    Attribute* attr = element->getFirstAttribute();
-    while (attr) {
-        std::cout << "  Attribute: " << attr->getName() << " = " << attr->getValue() << std::endl;
-        attr = attr->getNext();
-    }
-
-    Node* child = element->getFirstChild();
-    while (child) {
-        Element* childElement = dynamic_cast<Element*>(child);
-        if (childElement) {
-            print(childElement);
+        Attribute* attr = element->getFirstAttribute();
+        while (attr) {
+            std::cout << "  Attribute: " << attr->getName() << " = " << attr->getValue() << std::endl;
+            attr = attr->getNext();
         }
-        else {
-            Text* textNode = dynamic_cast<Text*>(child);
-            if (textNode) {
-                std::cout << "  Text: " << textNode->getText() << std::endl;
+
+        Node* child = element->getFirstChild();
+        while (child) {
+            Element* childElement = dynamic_cast<Element*>(child);
+            if (childElement) {
+                print(childElement);
+                break;
+            }
+            else {
+                Text* textNode = dynamic_cast<Text*>(child);
+                if (textNode) {
+                    std::cout << "  Text: " << textNode->getText() << std::endl;
+                }
+            }
+            if (child->getNextSibling()) {           
+                child = child->getNextSibling();
+            }
+            else {
+                child = nullptr;
             }
         }
-        child = child->getNextSibling();
+        if (element->getNextSibling()) {
+            element = dynamic_cast<Element*>(element->getNextSibling());
+        }
+        else
+        {
+            element=nullptr;
+        }
     }
+    std::cout << std::endl;
 }
+

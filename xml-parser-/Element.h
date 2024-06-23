@@ -4,7 +4,7 @@
 
 class Element : public Node
 {
-	String name="";
+	String name/*=""*/;
 	Attribute* firstAttribute;
 	Node* firstChild;
 public:

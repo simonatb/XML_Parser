@@ -10,9 +10,9 @@ int getCharPos(String& text, char ch) {
     return 0;
 }
 
-void separateString(String& first, String& second, String& text) {
-    first = text.substr(0, getCharPos(text, '/'));
-    second = text.substr(getCharPos(text, '/') + 1, text.length() - getCharPos(text, '/'));
+void separateString(String& first, String& second, String& text,char ch) {
+    first = text.substr(0, getCharPos(text, ch));
+    second = text.substr(getCharPos(text, ch) + 1, text.length() - getCharPos(text, '/'));
 }
 
 int fromStringToNumber(String& text) {
@@ -59,6 +59,7 @@ Element* XPath::getSiblingByTag(Element* root, String& name)
     Element* current = dynamic_cast<Element*>(root);
     while (current) {
         if (current && current->getName() == name) {
+            //std::cout << current->getName() << std::endl;
             return current;
         }
         current = dynamic_cast<Element*>(current->getNextSibling());
@@ -79,7 +80,20 @@ void XPath::getTextNodesOfElement(Node* element)
         current = dynamic_cast<Text*>(current->getNextSibling());
     }
 }
-
+void XPath::getTextNodesOfAttribute(Attribute* element)
+{
+    if (!element) {
+        std::cout << "null" << std::endl;
+    }
+    Element* elementNode = dynamic_cast<Element*>(element);
+    Attribute* current = dynamic_cast<Attribute*>(elementNode->getFirstAttribute());
+    while (current) {
+        
+            std::cout << current->getName() <<" : "<<current->getValue()<< std::endl;
+        
+        current = dynamic_cast<Attribute*>(current->getNextSibling());
+    }
+}
 void XPath::printTextNodesOf(String& text, Element* root)
 {
     if (!root) {
@@ -87,7 +101,7 @@ void XPath::printTextNodesOf(String& text, Element* root)
     }
     
     String first, second;
-    separateString(first, second, text);
+    separateString(first, second, text,'/');
 
     Element* currentSibling = getSiblingByTag(root, first);
     while (currentSibling) {
@@ -105,7 +119,7 @@ void XPath::printTextNodesOf(String& text, Element* root)
 
 void XPath::printTextNodesOfIndex(String& text, Element* root) {
     String first, second;
-    separateString(first, second, text);
+    separateString(first, second, text,'/');
     
     int index = getIndex(second);
     Element* currentSibling = getSiblingByTag(root, first);
@@ -128,7 +142,26 @@ void XPath::printTextNodesOfIndex(String& text, Element* root) {
 
 void XPath::printIdAttributeOfIndex(String& text, Element* root)
 {
+    String first, second;
+    separateString(first, second, text, '[');
+    second = second.substr(1, second.length() - 2);
     
+    Element* current = getSiblingByTag(root, first);
+    
+    while (current) {
+        Attribute* currentAttribute = current->getFirstAttribute();
+        while (currentAttribute) {
+            if (currentAttribute->getName() == second) {
+                std::cout << currentAttribute->getName() << " " << currentAttribute->getValue() << std::endl;
+            }
+            std::cout << currentAttribute << std::endl;
+            currentAttribute =(currentAttribute->getNext());
+            std::cout << currentAttribute << std::endl;
 
+        }
+        std::cout << current << std::endl;
+        current = dynamic_cast<Element*>(current->getNextSibling());
+        std::cout << current << std::endl;
+    }
 }
 

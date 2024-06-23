@@ -7,6 +7,7 @@ class XPath
 public:
 	Element* getSiblingByTag(Element* root, String& name);
 	void getTextNodesOfElement(Node* element);
+	void getTextNodesOfAttribute(Attribute* element);
 	void printTextNodesOf(String& text, Element* root);
 	void printTextNodesOfIndex(String& text, Element* root);
 	void printIdAttributeOfIndex(String& text, Element* root);

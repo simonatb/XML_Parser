@@ -7,5 +7,6 @@
 <person id=”1”>
 	<name>Ivan Petrov</name>
 	<address>Bulgaria</address>
+	<address>Russia</address>
 </person>
 
