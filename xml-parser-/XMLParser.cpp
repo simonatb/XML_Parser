@@ -20,6 +20,7 @@ unsigned charSize(const char* first) {
     return length;
 }
 
+
 bool startsWith(const char* text, const char* pattern) {
     if (!text || !pattern) {
         return false;
@@ -60,7 +61,7 @@ Element* XMLParser::parseXML() {
     buffer.readFile(filename.c_str());
 
     Element* root = nullptr;
-    
+    Element* current = nullptr;
     size_t pos = 0;
     while (pos < buffer.length()) {
         skipWhitespace(buffer, pos);
@@ -71,9 +72,15 @@ Element* XMLParser::parseXML() {
                 if (!root) {
                     root = element;                   
                 }
+                else if (!current) {
+                    current = element;
+                    root->setNextSibling(current);
+                }
                 else {
-                    root->setNextSibling(element); 
-                    
+
+                    current->setNextSibling(element); 
+                    current = element;
+
                 }
             }
         }
@@ -207,4 +214,3 @@ void XMLParser::print(Element* element) {
     }
     std::cout << std::endl;
 }
-

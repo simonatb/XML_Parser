@@ -3,10 +3,11 @@
 	<address type="home">Brooklyn, NY</address>
 <address type="work">Manhattan, NYC</address>
 	<occupation>dentist</occupation>
+	<occupation>urolog</occupation>
 </person>
 <person id=”1”>
 	<name>Ivan Petrov</name>
 	<address>Bulgaria</address>
 	<address>Russia</address>
+	<occupation>dentist</occupation>
 </person>
-

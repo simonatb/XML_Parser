@@ -10,6 +10,8 @@ int getCharPos(String& text, char ch) {
     return 0;
 }
 
+
+
 void separateString(String& first, String& second, String& text,char ch) {
     first = text.substr(0, getCharPos(text, ch));
     second = text.substr(getCharPos(text, ch) + 1, text.length() - getCharPos(text, '/'));
@@ -59,7 +61,6 @@ Element* XPath::getSiblingByTag(Element* root, String& name)
     Element* current = dynamic_cast<Element*>(root);
     while (current) {
         if (current && current->getName() == name) {
-            //std::cout << current->getName() << std::endl;
             return current;
         }
         current = dynamic_cast<Element*>(current->getNextSibling());

@@ -9,6 +9,7 @@
 namespace {
 	constexpr unsigned BUFFER_SIZE = 124;
 }
+
 class XMLParser {
 	String filename;
 public:
@@ -20,6 +21,8 @@ public:
 	Text* parseText(String& buffer, size_t& pos);
 	String parseName(String& buffer, size_t& pos);
 	void print(Element* element);
+
+	void setUniqueId(Element* root);
 };
 
 

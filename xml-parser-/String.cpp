@@ -79,6 +79,7 @@ String::String(const char* str)
     strcpy(data, str);
 }
 
+
 String::String(const String& other)
 {
     copyFrom(other);
