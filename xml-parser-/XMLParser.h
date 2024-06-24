@@ -11,18 +11,17 @@ namespace {
 }
 
 class XMLParser {
-	String filename;
-public:
-	XMLParser(const String& filename);
-
-	Element* parseXML();
+private:
 	Element* parseElement(String& buffer, size_t& pos);
-	void parseAttributes(Element* element,String& buffer, size_t& pos);
+	void parseAttributes(Element* element, String& buffer, size_t& pos);
 	Text* parseText(String& buffer, size_t& pos);
 	String parseName(String& buffer, size_t& pos);
-	void print(Element* element);
-
+	bool checkId(Element* element) const;
+	void ensureId(Element* root);
 	void setUniqueId(Element* root);
+public:
+	Element* parseXML(const String& filename);
+	void print(Element* element);
 };
 
 

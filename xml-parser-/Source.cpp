@@ -6,11 +6,10 @@
 #include "Element.h"
 #include "Text.h"
 #include "XMLParser.h"
-
+#include "XMLEdit.h"
 #include "XPath.h"
 
 int main() {
-   
+    
 }
-
     

@@ -2,6 +2,7 @@
 #include <cstring>
 #pragma warning(disable:4996)
 
+
 namespace {
     constexpr unsigned BUFFER_SIZE = 124;
 }
@@ -140,6 +141,7 @@ String& String::operator+=(char ch)
         resize();
     }
     data[len++] = ch;
+    data[len] = '\0';
     return *this;
 }
 
@@ -177,6 +179,11 @@ String String::substr(size_t start, size_t length) {
     String result(substr);
     delete[] substr;
     return result;
+}
+
+String String::fromIntToString(int number)
+{
+    return String();
 }
 
 char& String::operator[](size_t index)

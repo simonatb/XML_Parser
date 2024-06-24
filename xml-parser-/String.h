@@ -19,7 +19,6 @@ public:
     explicit String(unsigned capacity);
     String();
     String(const char* str);
-    String(const char str);
     String(const String& other);
     String& operator=(const String& other);
     ~String();
@@ -38,6 +37,8 @@ public:
     bool isSpace(size_t index) const;
 
     String substr(size_t start, size_t end);
+
+    String fromIntToString(int number);
 
     friend String operator+(const String& lhs, const String& rhs);
     friend std::istream& operator>>(std::istream& is, String& str);

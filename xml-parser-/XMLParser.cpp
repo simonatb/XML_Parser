@@ -54,9 +54,7 @@ bool isSubstring(const char* text, const char* pattern) {
     return false;
 }
 
-XMLParser::XMLParser(const String& filename) : filename(filename) {}
-
-Element* XMLParser::parseXML() {
+Element* XMLParser::parseXML(const String& filename) {
     String buffer;
     buffer.readFile(filename.c_str());
 
@@ -88,6 +86,7 @@ Element* XMLParser::parseXML() {
             ++pos;
         }
     }
+    setUniqueId(root);
     return root;
 }
 
@@ -213,4 +212,61 @@ void XMLParser::print(Element* element) {
         }
     }
     std::cout << std::endl;
+}
+
+String generateIndex(int number) {
+    String result;
+    char base = '0';
+    base += number;
+    result += base;
+    return result;
+}
+
+bool XMLParser::checkId(Element* element) const
+{
+    String id("id");
+    if (!element) {
+        return 0;
+    }
+    Attribute* attribute = dynamic_cast<Attribute*>(element->getFirstAttribute());
+    while (attribute) {
+        if (attribute->getName() == id) {
+            return 1;
+        }
+        attribute = attribute->getNext();
+    }
+    return 0;
+}
+
+void XMLParser::ensureId(Element* root)
+{
+    String idNum("0");
+    String id("id");
+    Element* current = root;
+    while (current) {
+        if (checkId(current)==0) {
+            Attribute* idAttribute = new Attribute(id, idNum);
+            current->addAttribute(idAttribute);
+        }
+        current = dynamic_cast<Element*>(current->getNextSibling());
+    }
+}
+
+void XMLParser::setUniqueId(Element* root)
+{
+    ensureId(root);
+    String id("id");
+    int count = 0;
+    Element* current = root;
+    while (current) {
+        Attribute* attribute = current->getFirstAttribute();
+        while (attribute) {
+            if (attribute->getName() == id) {
+                attribute->setValue(generateIndex(count));
+                count++;
+            }
+            attribute = attribute->getNext();
+        }
+        current = dynamic_cast<Element*>(current->getNextSibling());
+    }
 }

@@ -10,8 +10,6 @@ int getCharPos(String& text, char ch) {
     return 0;
 }
 
-
-
 void separateString(String& first, String& second, String& text,char ch) {
     first = text.substr(0, getCharPos(text, ch));
     second = text.substr(getCharPos(text, ch) + 1, text.length() - getCharPos(text, '/'));
@@ -65,6 +63,7 @@ Element* XPath::getSiblingByTag(Element* root, String& name)
         }
         current = dynamic_cast<Element*>(current->getNextSibling());
     }
+    return nullptr;
 }
 
 void XPath::getTextNodesOfElement(Node* element)
@@ -141,12 +140,12 @@ void XPath::printTextNodesOfIndex(String& text, Element* root) {
     }
 }
 
-void XPath::printIdAttributeOfIndex(String& text, Element* root)
+void XPath::printIdAttributes(String& text, Element* root)
 {
     String first, second;
     separateString(first, second, text, '[');
     second = second.substr(1, second.length() - 2);
-    
+    std::cout << first << " " << second;
     Element* current = getSiblingByTag(root, first);
     
     while (current) {
@@ -155,14 +154,13 @@ void XPath::printIdAttributeOfIndex(String& text, Element* root)
             if (currentAttribute->getName() == second) {
                 std::cout << currentAttribute->getName() << " " << currentAttribute->getValue() << std::endl;
             }
-            std::cout << currentAttribute << std::endl;
             currentAttribute =(currentAttribute->getNext());
-            std::cout << currentAttribute << std::endl;
 
         }
-        std::cout << current << std::endl;
         current = dynamic_cast<Element*>(current->getNextSibling());
-        std::cout << current << std::endl;
     }
 }
+
+
+
 

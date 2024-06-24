@@ -1,13 +1,26 @@
-<person id="0">
-	<name>John Smith</name>
-	<address type="home">Brooklyn, NY</address>
-<address type="work">Manhattan, NYC</address>
-	<occupation>dentist</occupation>
-	<occupation>urolog</occupation>
+<person>
+   <name nameType="fullname">Petar Tudjarov</name>
+   <name nameType="nickname">Djaro</name>
+   <occupation>Businessman</occupation>
+   <address addressType="work">The Needle</address>
+   <address addressType="home">Lozenets</address>
 </person>
-<person id=”1”>
-	<name>Ivan Petrov</name>
-	<address>Bulgaria</address>
-	<address>Russia</address>
-	<occupation>dentist</occupation>
+<person>
+   <name nameType="fullname">Ivo Andonov</name>
+   <name nameType="nickname">Ivaka</name>
+   <occupation>Investor</occupation>
+   <address addressType="work">Marinela</address>
+   <address addressType="favourite">Planet bar</address>
+</person>
+<person id="4">
+   <name nameType="fullname">Emil Popov</name>
+   <name nameType="nickname">Popov</name>
+   <occupation>Police inspector</occupation>
+   <relationship relationshipType="marital">divorced</relationship>
+</person>
+<person id="3">
+   <name nameType="fullname">Martin Hristov</name>
+   <name nameType="nickname">The boxer</name>
+   <occupation occupationType="previous">Agent undercover</occupation>
+   <occupation occupationType="current">Police inspector</occupation>
 </person>
