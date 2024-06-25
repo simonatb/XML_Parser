@@ -46,7 +46,6 @@ void String::readFile(const char* filename)
     std::ifstream ifs(filename);
     if (!ifs.is_open()) {
         std::cerr << "Error opening file: " << filename << std::endl;
-        
     }
 
     int size = getFileSize(ifs);
@@ -75,7 +74,7 @@ String::String() : String("")
 String::String(const char* str)
 {
     len = strlen(str);
-    capacity = std::max((int)getNextPowerOfTwo(len), 16) - 1;
+    capacity = getNextPowerOfTwo(len);
     data = new char[capacity + 1];
     strcpy(data, str);
 }
@@ -119,7 +118,7 @@ String& String::concat(const String& other)
         return *this;
     }
     len += other.len;
-    capacity = getNextPowerOfTwo(len) - 1;
+    capacity = getNextPowerOfTwo(len);
     char* res = new char[capacity + 1];
     strcpy(res, data);
     strcat(res, other.data);
@@ -223,7 +222,7 @@ std::istream& operator>>(std::istream& is, String& str)
 
     delete[] str.data;
     str.len = strlen(buff);
-    str.capacity = std::max((int)getNextPowerOfTwo(str.len), 16) - 1;
+    str.capacity = getNextPowerOfTwo(str.len);
     str.data = new char[str.capacity + 1];
     strcpy(str.data, buff);
 

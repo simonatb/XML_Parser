@@ -16,9 +16,11 @@ int main() {
     String str4("nameType");
     String str5("none");
     String str6("occupationType");
+
     XMLEdit edit;
     XPath path;
     XMLParser parser;
+
     Element* root = parser.parseXML("test2.txt");
     parser.print(root);
     std::cout << std::endl;

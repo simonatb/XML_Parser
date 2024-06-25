@@ -159,7 +159,7 @@ Element* XMLParser::parseElement(String& buffer, size_t& pos) {
         skipWhitespace(buffer, pos);
     }
 
-    pos += 2 + name.length() + 1;
+    pos += 2 + name.length() + 1;//skipvame zatvarqshiq tag s imeto
 
     return element;
 }
@@ -169,8 +169,8 @@ void XMLParser::parseAttributes(Element* element, String& buffer, size_t& pos) {
     while (buffer[pos] != '>' && buffer[pos] != '/') {
         String name = parseName(buffer, pos);
         skipWhitespace(buffer, pos);
-        ++pos; 
-        skipWhitespace(buffer, pos);
+        ++pos; //skipvame ravnoto
+        
         char quote = buffer[pos++];
         size_t start = pos;
         while (buffer[pos] != quote) {
@@ -249,14 +249,6 @@ void XMLParser::print(Element* element) {
         }
     }
     std::cout << std::endl;
-}
-
-String generateIndex(int number) {
-    String result;
-    char base = '0';
-    base += number;
-    result += base;
-    return result;
 }
 
 bool XMLParser::checkId(Element* element) const
