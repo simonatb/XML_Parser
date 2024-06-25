@@ -148,14 +148,15 @@ void XMLEdit::deleteAttribute(Element* root, int id, const String& key)
     if (current) {
         Element* currentChild = dynamic_cast<Element*>(current->getFirstChild());
         while (currentChild) {
-            if (currentChild->getFirstAttribute())
+            Attribute* attribute = currentChild->getFirstAttribute();
+            while(attribute)
             {
-                if (currentChild->getFirstAttribute()->getName() == key) {
+                if (attribute->getName() == key) {
 
-                    currentChild->getFirstAttribute()->~Attribute();
+                    attribute->~Attribute();
                     currentChild->setFirstAttribute(nullptr);
-                    return;
                 }
+                attribute = attribute->getNext();
             }
             currentChild = dynamic_cast<Element*>(currentChild->getNextSibling());
         }

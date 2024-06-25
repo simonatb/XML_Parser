@@ -1,6 +1,43 @@
 #include "XMLParser.h"
 
 // Helper functions
+char digitToChar(int digit) {
+    if (digit >= 0 && digit <= 9) {
+        return '0' + digit;
+    }
+    return '\0';
+}
+
+int numberSize(int number) {
+    if (number == 0) return 1;
+    int length = 0;
+    while (number) {
+        number /= 10;
+        length++;
+    }
+    return length;
+}
+
+String fromIntegerToString(int number) {
+    if (number == 0) return "0";
+
+    String result;
+
+    int length = numberSize(number);
+    for (int i = 0; i < length; i++) {
+        int divisor = 1;
+        for (int j = 0; j < length - i - 1; j++) {
+            divisor *= 10;
+        }
+
+        int digit = number / divisor;
+        result += digitToChar(digit);
+        number %= divisor;
+    }
+
+    return result;
+}
+
 void skipWhitespace(String& xml, size_t& pos) {
     while (pos < xml.length() && xml.isSpace(pos)) {
         ++pos;
@@ -262,7 +299,7 @@ void XMLParser::setUniqueId(Element* root)
         Attribute* attribute = current->getFirstAttribute();
         while (attribute) {
             if (attribute->getName() == id) {
-                attribute->setValue(generateIndex(count));
+                attribute->setValue(fromIntegerToString(count));
                 count++;
             }
             attribute = attribute->getNext();

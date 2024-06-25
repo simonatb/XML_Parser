@@ -145,7 +145,7 @@ void XPath::printIdAttributes(String& text, Element* root)
     String first, second;
     separateString(first, second, text, '[');
     second = second.substr(1, second.length() - 2);
-    std::cout << first << " " << second;
+  
     Element* current = getSiblingByTag(root, first);
     
     while (current) {

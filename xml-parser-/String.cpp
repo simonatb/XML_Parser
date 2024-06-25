@@ -181,11 +181,6 @@ String String::substr(size_t start, size_t length) {
     return result;
 }
 
-String String::fromIntToString(int number)
-{
-    return String();
-}
-
 char& String::operator[](size_t index)
 {
     return data[index];
